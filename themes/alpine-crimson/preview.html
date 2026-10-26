@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en" data-discord-titlebar>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Alpine Crimson - fictional preview</title>
+  <link rel="icon" href="../../src-tauri/icons/32x32.png">
+  <link rel="stylesheet" href="../../src-tauri/injection/shared/titlebar.css">
+  <link rel="stylesheet" href="alpine-crimson.css">
+  <style>
+    :root { --alpine-background: url("wallpaper.jpg"); color-scheme: dark; }
+    * { box-sizing: border-box; }
+    body { margin: 0; color: #d4d5e0; font: 14px/1.5 "Segoe UI", sans-serif; }
+    button, input { font: inherit; }
+    a { color: inherit; text-decoration: none; }
+    button { color: inherit; cursor: pointer; }
+    #discord-integrated-titlebar .window-hover-demo {
+      background: rgba(var(--alpine-window-rgb), .16);
+      box-shadow: inset 0 -2px rgb(var(--alpine-window-rgb));
+    }
+    .app-layout { display: grid; grid-template-columns: 374px minmax(0, 1fr) 280px; height: 100%; }
+    .sidebar_demo { display: grid; grid-template-columns: 72px 302px; position: relative; min-height: 0; }
+    .rail { padding: 14px 12px 78px; }
+    .server-stack { display: flex; flex-direction: column; align-items: center; gap: 16px; }
+    .blobContainer_demo { position: relative; width: 48px; height: 48px; }
+    .server { width: 48px; height: 48px; border-radius: 16px; display: grid; place-items: center; cursor: pointer; }
+    .server img.icon_demo { width: 48px; height: 48px; border-radius: 16px; }
+    .home { background: #5865f2; position: relative; }
+    .home::before { content: ""; position: absolute; left: -12px; height: 36px; width: 4px; background: #eee; border-radius: 4px; }
+    .home img { width: 29px; filter: brightness(0) invert(1); }
+    .divider { height: 1px; background: #ffffff20; width: 32px; }
+    .numberBadge_demo { position: absolute; right: -3px; bottom: -3px; min-width: 20px; padding: 0 5px; border: 3px solid #10121e; border-radius: 20px; font-size: 11px; font-weight: 700; pointer-events: none; }
+    .utility { background: #2d303d; color: #bdc1cd; font-size: 27px; border-radius: 50%; }
+    .sidebarList_demo { min-width: 0; }
+    .privateChannels_demo { height: 100%; }
+    .search-header { height: 49px; padding: 8px; border-bottom: 1px solid var(--alpine-frame); }
+    .search { background: #11131e; padding: 6px 12px; border: 1px solid #ffffff0c; border-radius: 7px; color: #a7acbc; }
+    .dm-list { padding: 12px 8px; }
+    .nav { display: flex; align-items: center; gap: 14px; padding: 9px 12px; color: #a7acbc; border-radius: 7px; }
+    .nav-symbol { font-size: 21px; width: 24px; text-align: center; }
+    .dm-heading { display: flex; justify-content: space-between; color: #9096a8; font-size: 12px; margin: 22px 10px 12px; }
+    .interactive_demo { border-radius: 7px; margin: 3px 0; }
+    .dm-link { display: flex; align-items: center; gap: 12px; padding: 8px 10px; height: 52px; }
+    .avatar { width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; background: #41475d; color: #e7e8f1; font-size: 12px; font-weight: 600; position: relative; flex-shrink: 0; }
+    .avatar.purple { background: #55415f; }
+    .avatar.green { background: #35544b; }
+    .avatar.gold { background: #66513b; }
+    .status { position: absolute; right: -1px; bottom: -1px; width: 12px; height: 12px; border: 3px solid #171a25; border-radius: 50%; background: #53b68b; }
+    .dm-link small { display: block; color: #a7acbc; font-size: 11px; }
+    .account { position: absolute; bottom: 8px; left: 8px; right: 8px; height: 60px; padding: 9px 11px; display: flex; align-items: center; gap: 9px; border: 1px solid #ffffff1a; border-radius: 10px; background: #10121ac7; z-index: 3; }
+    .account-name { flex: 1; }
+    .account small { display: block; font-size: 11px; color: #a7acbc; }
+    .account-tools { display: flex; align-items: center; gap: 14px; color: #a7acbc; font-size: 19px; }
+    .muted { color: #ef6072; background: #ef60721c; padding: 3px 8px; border-radius: 7px; }
+    .chat-column { min-width: 0; display: flex; flex-direction: column; border-top: 1px solid var(--alpine-frame); }
+    .chat-header { height: 49px; flex-shrink: 0; display: flex; align-items: center; padding: 0 20px; gap: 10px; border-bottom: 1px solid #ffffff19; }
+    .chat-header strong { flex: 1; font-weight: 600; }
+    .status-inline { width: 9px; height: 9px; border-radius: 50%; background: #53b68b; }
+    .toolbar { display: flex; gap: 22px; color: #a7acbc; font-size: 20px; }
+    .chatContent_demo { position: relative; flex: 1; min-height: 0; padding: 28px 24px 120px; }
+    .day { display: flex; align-items: center; gap: 12px; font-size: 11px; color: #9298ab; }
+    .day::before, .day::after { content: ""; height: 1px; background: #ffffff16; flex: 1; }
+    .message { display: flex; gap: 14px; margin: 24px 0; }
+    .message .copy { flex: 1; }
+    .author { color: #eceaf1; font-weight: 600; }
+    .author small { font-size: 10px; color: #9298ab; margin-left: 7px; font-weight: 400; }
+    .message p { margin: 4px 0; font-size: 15px; line-height: 1.65; }
+    .mentioned { padding: 10px 24px; margin-left: -24px; margin-right: -24px; border-left: 3px solid var(--alpine-accent); background: var(--alpine-accent-soft); }
+    .mention { color: #ffafba; background: #ef607228; border-radius: 3px; padding: 1px 3px; }
+    .reactionMe_demo { display: inline-flex; gap: 6px; border: 1px solid; border-radius: 6px; padding: 2px 8px; font-size: 12px; margin-top: 5px; }
+    .unread { display: flex; align-items: center; gap: 8px; color: #ef6072; font-size: 9px; }
+    .unread::before { content: ""; height: 1px; flex: 1; background: #ef607280; }
+    .composer { position: absolute; left: 14px; right: 14px; bottom: 43px; padding: 15px; border: 1px solid #ffffff19; border-radius: 9px; background: #141621f0; color: #9da2b6; display: flex; gap: 17px; }
+    .composer .placeholder { flex: 1; }
+    .preview-note { position: absolute; left: 16px; bottom: 13px; font-size: 10px; color: #a7acbc; }
+    .aside_demo { padding: 14px; border-left: 1px solid var(--alpine-frame); min-width: 0; }
+    .profile-card { height: 100%; border: 1px solid #ffffff14; border-radius: 12px; overflow: hidden; position: relative; }
+    .banner { height: 118px; background: linear-gradient(130deg, #71445688, #303f5a66); }
+    .profile-avatar { width: 80px; height: 80px; margin: -40px 16px 0; border: 6px solid #171a25; font-size: 26px; }
+    .profile-body { padding: 17px; }
+    .profile-body h2 { font-size: 21px; margin: 0 0 3px; }
+    .handle { color: #a7acbc; font-size: 12px; }
+    .tags { display: flex; gap: 7px; margin: 16px 0 24px; }
+    .tag { border: 1px solid #ffffff1a; padding: 3px 7px; border-radius: 5px; font-size: 10px; }
+    .tag.red { border-color: #ef607250; color: #ffafba; background: #ef60721c; }
+    .profile-body h3 { font-size: 10px; letter-spacing: 1px; text-transform: uppercase; margin: 24px 0 7px; color: #a7acbc; }
+    .profile-body p { font-size: 13px; margin: 4px 0; }
+    .profile-button { position: absolute; bottom: 16px; left: 16px; right: 16px; padding: 10px; text-align: center; border: 1px solid #ffffff1a; border-radius: 7px; background: #ffffff08; font-size: 12px; }
+  </style>
+</head>
+<body>
+  <header id="discord-integrated-titlebar" aria-label="Illustrative window controls">
+    <span class="discord-titlebar-brand"><img src="../../src-tauri/icons/32x32.png" alt=""><span>Discord</span></span>
+    <button class="window-hover-demo" data-action="minimize" aria-label="Minimise example"><svg viewBox="0 0 17 17"><path d="M3 8.5h11"/></svg></button>
+    <button class="window-hover-demo" data-action="maximize" aria-label="Maximise example"><svg viewBox="0 0 17 17"><path d="M3 7V3h4m3 0h4v4m0 3v4h-4m-3 0H3v-4"/></svg></button>
+    <button class="window-hover-demo" data-action="close" aria-label="Close example"><svg viewBox="0 0 17 17"><path d="m3.5 3.5 10 10m0-10-10 10"/></svg></button>
+  </header>
+  <div id="app-mount">
+    <div class="app-layout">
+      <div class="sidebar_demo">
+        <nav class="rail guilds_demo" aria-label="Fictional servers">
+          <div class="server-stack" data-list-id="guildsnav">
+            <div class="blobContainer_demo"><div class="server home" data-list-item-id="guildsnav___home" aria-selected="true"><img src="../../src-tauri/icons/32x32.png" alt="Discord home"></div></div>
+            <div class="divider"></div>
+            <div class="blobContainer_demo"><div class="server" data-list-item-id="demo-studio" aria-selected="false"><img class="icon_demo" data-art="studio" alt="Studio server"></div><span class="numberBadge_demo">3</span></div>
+            <div class="blobContainer_demo" id="colour-demo"><div class="server" data-list-item-id="demo-orbit" aria-selected="false"><img class="icon_demo" data-art="orbit" alt="Orbit server"></div><span class="numberBadge_demo">8</span></div>
+            <div class="blobContainer_demo"><div class="server" data-list-item-id="demo-camp" aria-selected="false"><img class="icon_demo" data-art="camp" alt="Camp server"></div></div>
+            <div class="blobContainer_demo"><div class="server" data-list-item-id="demo-heart" aria-selected="false"><img class="icon_demo" data-art="heart" alt="Friends server"></div><span class="numberBadge_demo">12</span></div>
+            <div class="server utility">+</div><div class="server utility">&#9672;</div><div class="server utility">&#8595;</div>
+          </div>
+        </nav>
+        <div class="sidebarList_demo">
+          <nav class="privateChannels_demo">
+            <div class="search-header"><div class="search">Find or start a conversation</div></div>
+            <div class="dm-list">
+              <a class="nav" href="#friends"><span class="nav-symbol">&#9823;</span>Friends</a>
+              <a class="nav" href="#nitro"><span class="nav-symbol">&#9670;</span>Nitro</a>
+              <div class="interactive_demo"><a class="nav" href="/shop"><span class="nav-symbol">&#9638;</span>Shop</a></div>
+              <a class="nav" href="#quests"><span class="nav-symbol">&#9873;</span>Quests</a>
+              <div class="dm-heading">DIRECT MESSAGES<span>+</span></div>
+              <div class="interactive_demo interactiveSelected_demo" data-alpine-halo-target><a class="dm-link" href="#alex" aria-label="Alex (direct message)"><span class="avatar purple">AL<i class="status"></i></span><span>Alex<small>Online</small></span></a></div>
+              <div class="interactive_demo"><a class="dm-link" href="#studio" aria-label="Studio chat (direct message)"><span class="avatar green">ST</span><span>Studio chat<small>5 members</small></span></a></div>
+              <div class="interactive_demo"><a class="dm-link" href="#sam" aria-label="Sam (direct message)"><span class="avatar gold">SA</span><span>Sam</span></a></div>
+              <div class="interactive_demo"><a class="dm-link" href="#jordan" aria-label="Jordan (direct message)"><span class="avatar">JO</span><span>Jordan</span></a></div>
+              <div class="interactive_demo"><a class="dm-link" href="#casey" aria-label="Casey (direct message)"><span class="avatar green">CA<i class="status"></i></span><span>Casey</span></a></div>
+            </div>
+          </nav>
+        </div>
+        <section class="account"><span class="avatar">YO<i class="status"></i></span><span class="account-name">You<small>Online</small></span><span class="account-tools"><span class="muted">&#9834;</span><span>&#9788;</span><span>&#9881;</span></span></section>
+      </div>
+      <section class="chat-column">
+        <section class="container_demo themed_demo chat-header"><span class="status-inline"></span><strong>Alex</strong><span class="toolbar"><span>&#9742;</span><span>&#9656;</span><span>&#9873;</span><span>&#9786;</span></span></section>
+        <main class="chatContent_demo">
+          <div class="day">26 October 2026</div>
+          <div class="message"><span class="avatar purple">AL</span><div class="copy"><div class="author">Alex<small>12:18 PM</small></div><p>The mountain backdrop looks great.<br>Calm scenery, with just enough colour.</p></div></div>
+          <div class="message"><span class="avatar">YO</span><div class="copy"><div class="author">You<small>12:19 PM</small></div><p>And the sidebar frame joins cleanly now.<br>No dark strip under the profile controls.</p></div></div>
+          <div class="message mentioned"><span class="avatar purple">AL</span><div class="copy"><div class="author">Alex<small>12:21 PM</small></div><p><span class="mention">@You</span> A little red in the useful places.<br>The selected conversation keeps its blue-purple halo.</p><span class="reactionMe_demo">&#9829; &nbsp; 2</span></div></div>
+          <div class="message"><span class="avatar">YO</span><div class="copy"><div class="author">You<small>12:22 PM</small></div><p>Server icons and counters stay quiet until hovered.<br>The Discord home icon keeps its colour.</p></div></div>
+          <div class="unread">NEW</div>
+          <div class="message"><span class="avatar purple">AL</span><div class="copy"><div class="author">Alex<small>12:24 PM</small></div><p>Simple things, done well.</p></div></div>
+          <div class="composer"><span>+</span><span class="placeholder">Message @Alex</span><span>&#9638;</span><span>&#9786;</span><span style="color:#ef6072">&#10148;</span></div>
+          <div class="preview-note">Fictional mock-up &middot; Window hover colours shown together &middot; Hover a server or Alex to preview interactions</div>
+        </main>
+      </section>
+      <aside class="aside_demo"><div class="user-profile-sidebar profile-card"><div class="banner"></div><div class="avatar purple profile-avatar">AL<i class="status"></i></div><div class="profile-body"><h2>Alex</h2><div class="handle">alex.example</div><div class="tags"><span class="tag">Design</span><span class="tag red">Creative</span></div><h3>About me</h3><p>Good conversations.<br>Simple things, done well.</p><h3>Member since</h3><p>January 2020</p><h3>Mutual servers</h3><p>Studio &amp; Friends</p></div><div class="profile-button">View Full Profile</div></div></aside>
+    </div>
+  </div>
+  <script>
+    const artwork = {
+      studio: ['#654ad2', '<path d="M14 31 24 13l10 18H14" fill="none" stroke="#fff" stroke-width="4"/>'],
+      orbit: ['#176eaa', '<ellipse cx="24" cy="24" rx="17" ry="7" fill="none" stroke="#8be7ff" stroke-width="3" transform="rotate(-35 24 24)"/><circle cx="24" cy="24" r="6" fill="#fff"/>'],
+      camp: ['#177065', '<path d="m9 35 15-24 15 24H9" fill="#c6f4ce"/><path d="m17 35 7-12 7 12" fill="#296b60"/>'],
+      heart: ['#922d49', '<path d="M24 37 10 23C1 12 17 5 24 16 31 5 47 12 38 23Z" fill="#ff678f"/>'],
+    };
+    document.querySelectorAll('[data-art]').forEach(image => {
+      const [colour, drawing] = artwork[image.dataset.art];
+      image.src = 'data:image/svg+xml;base64,' + btoa(`<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48"><rect width="48" height="48" rx="16" fill="${colour}"/>${drawing}</svg>`);
+    });
+    document.querySelectorAll('.dm-link').forEach(link => link.addEventListener('click', event => {
+      event.preventDefault();
+      document.querySelector('.interactiveSelected_demo')?.classList.remove('interactiveSelected_demo');
+      link.parentElement.classList.add('interactiveSelected_demo');
+    }));
+    document.querySelector('a[href="/shop"]').addEventListener('click', event => event.preventDefault());
+  </script>
+  <script src="Alpine-Crimson.js"></script>
+</body>
+</html>

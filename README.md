@@ -21,6 +21,18 @@
  https://discord.gg/agQ9mRdHMZ
 </div>
 
+# Alpine Crimson custom branch
+
+This branch contains an unofficial Discord-branded Dorion build, the Alpine Crimson
+theme and its optional configurable halo companion. See the
+[theme and installation guide](themes/alpine-crimson/README.md).
+
+![Alpine Crimson illustrative mock-up with fictional content](themes/alpine-crimson/preview.png)
+
+The preview uses fictional people and messages, not a live account screenshot.
+Upstream attribution and download links below are retained; those downloads are
+the original Dorion releases, not this custom build.
+
 # Download
 
 <table align="center">

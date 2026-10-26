@@ -1,0 +1,240 @@
+/**
+ * @name Alpine Crimson
+ * @description Mountain wallpaper, readable dark panels and restrained red accents.
+ * Wallpaper: https://images.unsplash.com/photo-1454496522488-7a8e488e8606
+ * Photo licence: https://unsplash.com/license
+ */
+
+:root {
+  --alpine-pointer-halo: 1;
+  --alpine-accent: #ef6072;
+  --alpine-accent-soft: rgba(239, 96, 114, 0.14);
+  --alpine-chat: rgba(16, 18, 26, 0.78);
+  --alpine-panel: rgba(16, 18, 30, 0.86);
+  --alpine-toolbar: rgba(9, 11, 18, 0.94);
+  --alpine-frame: rgba(210, 215, 232, 0.26);
+}
+
+:root,
+.theme-dark,
+.theme-darker,
+.theme-midnight {
+  --background-primary: var(--alpine-chat) !important;
+  --background-secondary: var(--alpine-panel) !important;
+  --background-secondary-alt: var(--alpine-toolbar) !important;
+  --background-tertiary: var(--alpine-toolbar) !important;
+  --background-base-low: var(--alpine-chat) !important;
+  --background-base-lower: var(--alpine-panel) !important;
+  --background-base-lowest: var(--alpine-toolbar) !important;
+  --background-surface-high: #171a25 !important;
+  --background-surface-higher: #1d202d !important;
+  --background-surface-highest: #232735 !important;
+  --background-floating: #171a25 !important;
+  --background-modifier-hover: rgba(255, 255, 255, 0.06) !important;
+  --background-modifier-active: rgba(239, 96, 114, 0.10) !important;
+  --background-modifier-selected: var(--alpine-accent-soft) !important;
+  --background-mentioned: var(--alpine-accent-soft) !important;
+  --background-mentioned-hover: rgba(239, 96, 114, 0.19) !important;
+  --text-normal: #d4d5e0 !important;
+  --text-default: #d4d5e0 !important;
+  --text-muted: #a7acbc !important;
+  --text-subtle: #a7acbc !important;
+  --header-primary: #eceaf1 !important;
+  --header-secondary: #a7acbc !important;
+  --text-link: #ffafba !important;
+  --interactive-normal: #a7acbc !important;
+  --interactive-hover: #eceaf1 !important;
+  --interactive-active: #faf1f4 !important;
+  --interactive-text-default: #a7acbc !important;
+  --interactive-text-hover: #eceaf1 !important;
+  --interactive-text-active: #faf1f4 !important;
+  --channeltextarea-background: rgba(20, 22, 33, 0.94) !important;
+  --input-background: #11131e !important;
+  --brand-500: #ef6072 !important;
+  --brand-530: #de5466 !important;
+  --brand-560: #cc485a !important;
+  --brand-600: #b83f50 !important;
+  --brand-experiment: #ef6072 !important;
+  --mention-background: rgba(239, 96, 114, 0.17) !important;
+  --mention-foreground: #ffafba !important;
+}
+
+#app-mount {
+  background-color: #090b12 !important;
+  background-image:
+    linear-gradient(rgba(5, 7, 11, 0.22), rgba(5, 7, 11, 0.40)),
+    var(--alpine-background, linear-gradient(#090b12, #090b12)) !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+}
+
+#app-mount > div[class*="appAsidePanelWrapper"],
+#app-mount div[class*="notAppAsidePanel"],
+#app-mount div[data-layer="base"],
+#app-mount div[data-layer="base"] > div[class*="container"],
+#app-mount div[class^="base_"],
+#app-mount div[class^="base_"] > div[class^="content_"],
+#app-mount div[class^="app_"],
+#app-mount div[class^="tabBody_"],
+#app-mount [class^="privateChannels_"] > div[class^="scroller_"],
+#app-mount aside[class^="aside_"] > .user-profile-sidebar,
+#app-mount div[class^="chat_"] {
+  background: transparent !important;
+}
+
+#app-mount main[class^="chatContent_"],
+#app-mount div[class^="page_"] > main[class^="container_"] {
+  --alpine-surface: var(--alpine-chat);
+}
+
+#discord-integrated-titlebar,
+#app-mount nav[class*="guilds_"],
+#app-mount [data-list-id="guildsnav"],
+#app-mount div[class^="sidebar_"],
+#app-mount div[class^="sidebarList_"],
+#app-mount [class^="privateChannels_"],
+#app-mount div[class^="membersWrap_"],
+#app-mount [class^="userPanelOuter_"],
+#app-mount [class^="userPanelInner_"],
+#app-mount [class^="profilePanel_"],
+#app-mount aside[class^="aside_"]:has(> .user-profile-sidebar),
+#app-mount section[class*="container_"][class*="themed_"],
+#app-mount div[class^="nowPlayingColumn_"] {
+  --alpine-surface: var(--alpine-panel);
+}
+
+#discord-integrated-titlebar,
+#app-mount main[class^="chatContent_"],
+#app-mount div[class^="page_"] > main[class^="container_"],
+#app-mount nav[class*="guilds_"],
+#app-mount [data-list-id="guildsnav"],
+#app-mount div[class^="sidebar_"],
+#app-mount div[class^="sidebarList_"],
+#app-mount [class^="privateChannels_"],
+#app-mount div[class^="membersWrap_"],
+#app-mount [class^="userPanelOuter_"],
+#app-mount [class^="userPanelInner_"],
+#app-mount [class^="profilePanel_"],
+#app-mount aside[class^="aside_"]:has(> .user-profile-sidebar),
+#app-mount section[class*="container_"][class*="themed_"],
+#app-mount div[class^="nowPlayingColumn_"] {
+  background-color: #090b12 !important;
+  background-image:
+    linear-gradient(var(--alpine-surface), var(--alpine-surface)),
+    var(--alpine-background, linear-gradient(#090b12, #090b12)) !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  background-attachment: fixed !important;
+}
+
+#app-mount div[class^="sidebarList_"] {
+  position: relative;
+  border: 0 !important;
+  border-radius: 0 !important;
+  overflow: hidden;
+}
+
+#app-mount div[class^="sidebar_"]::after {
+  background: transparent !important;
+}
+
+#app-mount [data-list-id="guildsnav"] [data-list-item-id]:not([data-list-item-id="guildsnav___home"])[aria-selected="false"]:not(:hover) > img[class^="icon_"] {
+  filter: grayscale(1) !important;
+}
+
+#app-mount [data-list-id="guildsnav"] [class^="blobContainer_"]:has([data-list-item-id] > img[class^="icon_"]):not(:hover) [class*="numberBadge_"] {
+  filter: grayscale(1) !important;
+}
+
+#app-mount div[class^="sidebarList_"]::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  box-sizing: border-box;
+  border: 1px solid var(--alpine-frame);
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+#app-mount div[class^="page_"] {
+  border-left-color: var(--alpine-frame) !important;
+}
+
+#app-mount div[class^="chat_"],
+#app-mount div[class^="page_"] > main[class^="container_"] {
+  border-top-color: var(--alpine-frame) !important;
+}
+
+#app-mount section[class*="container_"][class*="themed_"] div[class^="children_"]::after {
+  background: none !important;
+}
+
+#discord-integrated-titlebar button[data-action="minimize"] {
+  --alpine-window-rgb: 240, 164, 93;
+}
+
+#discord-integrated-titlebar button[data-action="maximize"] {
+  --alpine-window-rgb: 83, 156, 245;
+}
+
+#discord-integrated-titlebar button[data-action="close"] {
+  --alpine-window-rgb: 239, 91, 98;
+}
+
+#discord-integrated-titlebar button:is(:hover, :focus-visible) {
+  background: rgba(var(--alpine-window-rgb), 0.16) !important;
+  box-shadow: inset 0 -2px rgb(var(--alpine-window-rgb)) !important;
+  color: var(--text-normal, #eceaf1) !important;
+}
+
+#discord-integrated-titlebar button:focus-visible {
+  outline-color: rgb(var(--alpine-window-rgb)) !important;
+}
+
+#app-mount [class*="interactiveSelected_"],
+#app-mount [class*="modeSelected_"] [class*="link_"] {
+  background-color: var(--alpine-accent-soft) !important;
+  box-shadow: inset 3px 0 var(--alpine-accent);
+}
+
+#app-mount [class*="interactive_"]:has(> a[href="/shop"]) > [class^="tabHoverGradient_"] {
+  display: none !important;
+}
+
+#app-mount [class^="privateChannels_"] [class*="interactive_"][data-alpine-halo-target] {
+  background-color: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+}
+
+#app-mount [class^="privateChannels_"] [class*="interactive_"][data-alpine-halo-target]:is([class*="interactiveSelected_"], [data-alpine-halo-active]:hover) {
+  background-color: rgba(156, 153, 185, 0.12) !important;
+  background-image:
+    radial-gradient(
+      ellipse 125px 65px at var(--alpine-halo-x, 50%) var(--alpine-halo-y, 50%),
+      rgba(89, 161, 255, 0.65),
+      rgba(159, 124, 225, 0.30) 45%,
+      transparent 100%
+    ) !important;
+}
+
+#app-mount [class*="mentioned_"]::before {
+  background-color: var(--alpine-accent) !important;
+}
+
+#app-mount [class*="numberBadge_"] {
+  background-color: var(--alpine-accent) !important;
+  color: #ffffff !important;
+}
+
+#app-mount [class*="reactionMe_"] {
+  background-color: var(--alpine-accent-soft) !important;
+  border-color: rgba(239, 96, 114, 0.50) !important;
+}
+
+#app-mount [class*="reactionMe_"] [class*="reactionCount_"] {
+  color: #ffafba !important;
+}
