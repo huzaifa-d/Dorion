@@ -1,5 +1,5 @@
 {
-  "name": "Dorion Header Destroyer",
+  "name": "Discord Header Destroyer",
   "version": "1.1",
   "homepage_url": "https://github.com/SpikeHD/Dorion",
   "description": "Destroy CSP in Discord request headers and configure WebRTC IP handling",

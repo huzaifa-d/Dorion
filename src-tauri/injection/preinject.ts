@@ -1,8 +1,9 @@
 import { badPostMessagePatch, proxyFetch, proxyXHR, proxyAddEventListener, proxyOpen, proxyNotification } from './shared/recreate'
-import { extraCssChangeWatch, safemodeTimer, typingAnim } from './shared/ui'
+import { extraCssChangeWatch } from './shared/ui'
 import { cssSanitize, fetchImage, isJson, waitForApp, waitForElm, saferEval, timeout } from './shared/util'
 import { waitForElmEx } from './shared/wait_elm'
 import { configureDisplayMedia } from './shared/display_media'
+import { installIntegratedTitlebar } from './shared/titlebar'
 
 // Let's expose some stuff for use in plugins and such
 window.Dorion = {
@@ -67,11 +68,14 @@ window.Dorion = {
   }
 
   const debug = !window.__DORION_CONFIG__.client_plugins
+  const integratedTitlebar = platform === 'windows' &&
+    !window.__DORION_CONFIG__.use_native_titlebar &&
+    window.__TAURI__.webviewWindow.getCurrentWebviewWindow().label === 'main'
   console.log(window.__DORION_CONFIG__)
   const INJECTED_PLUGIN_OPTIONS = {
     isVisible: true,
     allowedActions: { toggle: debug },
-    loaderName: 'Dorion'
+    loaderName: 'Discord'
   }
 
   window.SHELTER_INJECTOR_PLUGINS = {
@@ -81,17 +85,22 @@ window.Dorion = {
         toggle: true,
       }
     }],
-    'Dorion Titlebar': ['https://spikehd.dev/shelter-plugins/dorion-titlebar/', INJECTED_PLUGIN_OPTIONS],
-    'Dorion Settings': ['https://spikehd.dev/shelter-plugins/dorion-settings/', INJECTED_PLUGIN_OPTIONS],
+    // Replace the cached loader plugin too, rather than only omitting future downloads.
+    'Discord Titlebar': integratedTitlebar ? {
+      js: '({})',
+      manifest: { name: 'Discord Titlebar' },
+      injectorIntegration: { ...INJECTED_PLUGIN_OPTIONS, isVisible: false },
+    } : ['https://spikehd.dev/shelter-plugins/dorion-titlebar/', INJECTED_PLUGIN_OPTIONS],
+    'Discord Settings': ['https://spikehd.dev/shelter-plugins/dorion-settings/', INJECTED_PLUGIN_OPTIONS],
     'Always Trust': ['https://spikehd.dev/shelter-plugins/always-trust/', INJECTED_PLUGIN_OPTIONS],
-    'Dorion Notifications': ['https://spikehd.dev/shelter-plugins/dorion-notifications/', INJECTED_PLUGIN_OPTIONS],
-    'Dorion Streamer Mode': ['https://spikehd.dev/shelter-plugins/dorion-streamer-mode/', INJECTED_PLUGIN_OPTIONS],
-    'Dorion Updater': ['https://spikehd.dev/shelter-plugins/dorion-updater/', INJECTED_PLUGIN_OPTIONS],
-    'Dorion PTT': ['https://spikehd.dev/shelter-plugins/dorion-ptt/', INJECTED_PLUGIN_OPTIONS],
-    'Dorion Tray': ['https://spikehd.dev/shelter-plugins/dorion-tray/', INJECTED_PLUGIN_OPTIONS],
-    'Dorion Fullscreen': ['https://spikehd.dev/shelter-plugins/dorion-fullscreen/', INJECTED_PLUGIN_OPTIONS],
-    'Dorion Custom Keybinds': ['https://spikehd.dev/shelter-plugins/dorion-custom-keybinds/', INJECTED_PLUGIN_OPTIONS],
-    'Dorion Helpers': ['https://spikehd.dev/shelter-plugins/dorion-helpers/', INJECTED_PLUGIN_OPTIONS],
+    'Discord Notifications': ['https://spikehd.dev/shelter-plugins/dorion-notifications/', INJECTED_PLUGIN_OPTIONS],
+    'Discord Streamer Mode': ['https://spikehd.dev/shelter-plugins/dorion-streamer-mode/', INJECTED_PLUGIN_OPTIONS],
+    'Discord Updater': ['https://spikehd.dev/shelter-plugins/dorion-updater/', INJECTED_PLUGIN_OPTIONS],
+    'Discord PTT': ['https://spikehd.dev/shelter-plugins/dorion-ptt/', INJECTED_PLUGIN_OPTIONS],
+    'Discord Tray': ['https://spikehd.dev/shelter-plugins/dorion-tray/', INJECTED_PLUGIN_OPTIONS],
+    'Discord Fullscreen': ['https://spikehd.dev/shelter-plugins/dorion-fullscreen/', INJECTED_PLUGIN_OPTIONS],
+    'Discord Custom Keybinds': ['https://spikehd.dev/shelter-plugins/dorion-custom-keybinds/', INJECTED_PLUGIN_OPTIONS],
+    'Discord Helpers': ['https://spikehd.dev/shelter-plugins/dorion-helpers/', INJECTED_PLUGIN_OPTIONS],
     'Web Keybinds': ['https://spikehd.dev/shelter-plugins/web-keybinds/', {
       ...INJECTED_PLUGIN_OPTIONS,
       allowedActions: {
@@ -100,11 +109,15 @@ window.Dorion = {
     }],
   }
 
+  if (integratedTitlebar) {
+    await installIntegratedTitlebar().catch(error => console.error('[Titlebar]', error))
+  }
+
   init()
 })()
 
 async function init() {
-  const { event, app } = window.__TAURI__
+  const { event } = window.__TAURI__
   const { invoke } = window.__TAURI__.core
   const config = await invoke('read_config_file')
 
@@ -124,22 +137,6 @@ async function init() {
   window.Dorion.shouldShowUnreadBadge = window.__DORION_CONFIG__.unread_badge
 
   await invoke('load_plugins')
-
-  const version = await app.getVersion()
-
-  await displayLoadingTop()
-
-  // Start the safemode timer
-  safemodeTimer(
-    document.querySelector('#safemode') as HTMLDivElement
-  )
-
-  updateOverlay({
-    subtitle: `Made with ❤️ by SpikeHD - v${version}`,
-    midtitle: 'Localizing JS imports...'
-  })
-
-  typingAnim()
 
   // Discord Web depends on the `beforeunload` event being dispatched by the browser when
   // a tab is closed. However, this event is not triggered by the Webview so we need to
@@ -178,14 +175,6 @@ async function init() {
   updateOverlay({
     midtitle: 'Done!'
   })
-
-  // Remove loading container
-  const loadingContainer = document.querySelector('#loadingContainer') as HTMLDivElement
-  loadingContainer.style.opacity = '0'
-
-  setTimeout(() => {
-    loadingContainer?.remove()
-  }, 200)
 
   // Unlisten from the log event
   logUnlisten()
@@ -286,24 +275,4 @@ async function handleClientModThemeInjection() {
 
     console.log('[Theme Loader] Appending Client Mod Styles')
   })()`
-}
-
-/**
- * Display the splashscreen
- */
-async function displayLoadingTop() {
-  const { invoke } = window.__TAURI__.core
-  const html = await invoke('get_index')
-  const loadingContainer = document.createElement('div') satisfies HTMLDivElement
-  loadingContainer.id = 'loadingContainer'
-  loadingContainer.innerHTML = html
-
-  loadingContainer.style.zIndex = '99999'
-  loadingContainer.style.position = 'absolute'
-  loadingContainer.style.top = '0'
-  loadingContainer.style.left = '0'
-  loadingContainer.style.width = '100vw'
-  loadingContainer.style.height = '100vh'
-
-  document.body.appendChild(loadingContainer)
 }

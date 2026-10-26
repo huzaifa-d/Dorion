@@ -11,16 +11,16 @@ pub struct Args {
   pub safemode: bool,
 
   #[options(
-    help = "start Dorion and tell it that we have opened on startup. this isn't really for users to use"
+    help = "start Discord and tell it that we have opened on startup. this isn't really for users to use"
   )]
   pub startup: bool,
 
-  #[options(help = "set a proxy that Dorion will use", meta = "URL")]
+  #[options(help = "set a proxy that Discord will use", meta = "URL")]
   pub proxy: Option<String>,
 
   #[cfg(target_os = "windows")]
   #[options(
-    help = "(windows only) set Dorion to fallback to it's old style of fetching external resources"
+    help = "(windows only) set Discord to fallback to it's old style of fetching external resources"
   )]
   pub legacy_fetch: bool,
 

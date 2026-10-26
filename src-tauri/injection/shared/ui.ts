@@ -1,4 +1,4 @@
-import { timeout, waitForDom } from './util'
+import { waitForDom } from './util'
 
 export function safemodeTimer(elm: HTMLDivElement) {
   setTimeout(() => {
@@ -29,34 +29,6 @@ export function safemodeTimer(elm: HTMLDivElement) {
   }
 
   document.addEventListener('keydown', tmpKeydown)
-}
-
-export async function typingAnim() {
-  const title = document.querySelector('#title')
-
-  if (!title) return
-
-  for (const letter of 'Dorion'.split('')) {
-    title.innerHTML = title.innerHTML.replace('|', '') + letter + '|'
-
-    await timeout(100)
-  }
-
-  // Once the "typing" is done, blink the cursor
-  let cur = true
-
-  setInterval(() => {
-    if (cur) {
-      cur = false
-
-      title.innerHTML = title.innerHTML.replace('|', '&nbsp;')
-      return
-    }
-
-    cur = true
-
-    title.innerHTML = title.innerHTML.replace(/&nbsp;$/, '|')
-  }, 500)
 }
 
 export async function applyExtraCSS() {

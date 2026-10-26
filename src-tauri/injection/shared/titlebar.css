@@ -1,0 +1,95 @@
+html[data-discord-titlebar] {
+  --discord-titlebar-height: 36px;
+  --custom-app-top-bar-height: 0px !important;
+}
+
+html[data-discord-titlebar] #app-mount div[class^="base_"] > div[class^="bar_"],
+html[data-discord-titlebar] #app-mount div[class*="-base"] > div[class*="-bar"] {
+  display: none !important;
+}
+
+html[data-discord-titlebar][data-discord-fullscreen] {
+  --discord-titlebar-height: 0px;
+}
+
+html[data-discord-titlebar] #app-mount {
+  position: fixed !important;
+  inset: var(--discord-titlebar-height) 0 0 !important;
+  height: calc(100% - var(--discord-titlebar-height)) !important;
+}
+
+html[data-discord-titlebar] #loadingContainer {
+  top: var(--discord-titlebar-height) !important;
+  height: calc(100% - var(--discord-titlebar-height)) !important;
+}
+
+#discord-integrated-titlebar {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 2147483647;
+  height: var(--discord-titlebar-height);
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  background: var(--background-base-lowest, var(--background-tertiary, #1e1f22));
+  color: var(--text-muted, #a3a6aa);
+  font: 500 13px "Segoe UI", sans-serif;
+  user-select: none;
+}
+
+html[data-discord-fullscreen] #discord-integrated-titlebar {
+  display: none;
+}
+
+#discord-integrated-titlebar .discord-titlebar-brand {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  pointer-events: none;
+}
+
+#discord-integrated-titlebar img {
+  width: 18px;
+  height: 18px;
+}
+
+#discord-integrated-titlebar button {
+  appearance: none;
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: inherit;
+  cursor: default;
+}
+
+#discord-integrated-titlebar button:hover {
+  background: var(--background-modifier-hover, #ffffff12);
+  color: var(--text-normal, #f2f3f5);
+}
+
+#discord-integrated-titlebar button:focus-visible {
+  outline: 2px solid var(--brand-500, #5865f2);
+  outline-offset: -3px;
+}
+
+#discord-integrated-titlebar button[data-action="close"]:hover {
+  background: #c42b1c;
+  color: #ffffff;
+}
+
+#discord-integrated-titlebar svg {
+  width: 14px;
+  height: 14px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  pointer-events: none;
+}

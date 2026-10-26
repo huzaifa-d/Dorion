@@ -1,4 +1,5 @@
 import { isJson } from './util'
+import { brandPluginResponse } from './branding'
 
 export async function proxyFetch() {
   window.nativeFetch = window.fetch
@@ -20,7 +21,7 @@ export async function proxyFetch() {
         return
       }
 
-      return window.nativeFetch(url, options)
+      return brandPluginResponse(url.toString(), await window.nativeFetch(url, options))
     }
 
     // If there is an options.body, check if it's valid JSON. if so, set that up
@@ -49,7 +50,7 @@ export async function proxyFetch() {
       ...options
     }).catch((e: Error) => console.error('[Proxy Fetch] Failed to fetch: ', e))
 
-    return response
+    return response && brandPluginResponse(url.toString(), response)
   }
 }
 

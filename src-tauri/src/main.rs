@@ -168,7 +168,7 @@ fn main() {
     .unwrap_or_else(|e| log!("Failed to set application: {:?}", e));
 
   log!(
-    "Starting Dorion version v{}",
+    "Starting Discord version v{}",
     context
       .config()
       .version
@@ -331,7 +331,7 @@ fn main() {
 
       let config = get_config();
       let preinject = PREINJECT.clone();
-      let title = format!("Dorion - v{}", app.package_info().version);
+      let title = format!("Discord - v{}", app.package_info().version);
       let mut win = WebviewWindowBuilder::new(app, "main", url_ext)
         .title(title.as_str())
         .resizable(true)

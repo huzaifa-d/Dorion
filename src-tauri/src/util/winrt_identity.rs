@@ -122,7 +122,7 @@ fn create_aumid_shortcut(executable: &Path, shortcut: &Path, app_id: &str) -> Re
   let executable_w = wide(executable.as_os_str());
   let shortcut_w = wide(shortcut.as_os_str());
   let app_id_w = wide(OsStr::new(app_id));
-  let description_w = wide(OsStr::new("Dorion Discord client"));
+  let description_w = wide(OsStr::new("Discord client"));
 
   let working_directory = executable
     .parent()
@@ -219,7 +219,7 @@ pub fn register(app_id: &str) -> Result<WinrtIdentityRegistration, String> {
     .join("Windows")
     .join("Start Menu")
     .join("Programs")
-    .join("Dorion.lnk");
+    .join("Discord.lnk");
 
   let shortcut_parent = shortcut
     .parent()

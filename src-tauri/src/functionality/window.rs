@@ -22,7 +22,7 @@ pub fn toggle_maximize(win: tauri::WebviewWindow) {
 }
 
 #[tauri::command]
-pub fn set_decorations(win: tauri::WebviewWindow, enable: bool) {
+pub fn set_decorations(win: tauri::WebviewWindow, enable: bool) -> Result<(), String> {
   #[cfg(target_os = "macos")]
   {
     let style = if enable {
@@ -31,12 +31,16 @@ pub fn set_decorations(win: tauri::WebviewWindow, enable: bool) {
       tauri::TitleBarStyle::Overlay
     };
 
-    let _ = win.set_title_bar_style(style);
+    win
+      .set_title_bar_style(style)
+      .map_err(|error| error.to_string())
   }
 
   #[cfg(not(target_os = "macos"))]
   {
-    let _ = win.set_decorations(enable);
+    win
+      .set_decorations(enable)
+      .map_err(|error| error.to_string())
   }
 }
 
