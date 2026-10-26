@@ -60,6 +60,7 @@
 }
 
 #app-mount {
+  cursor: var(--alpine-cursor, default);
   background-color: #090b12 !important;
   background-image:
     linear-gradient(rgba(5, 7, 11, 0.22), rgba(5, 7, 11, 0.40)),
@@ -67,6 +68,17 @@
   background-size: cover !important;
   background-position: center !important;
   background-repeat: no-repeat !important;
+}
+
+#discord-integrated-titlebar,
+#discord-integrated-titlebar button,
+#app-mount :is(nav, main, aside, section),
+#app-mount div:is([class^="sidebar_"], [class^="sidebarList_"], [class^="chat_"], [class^="page_"]) {
+  cursor: var(--alpine-cursor, default);
+}
+
+#app-mount :is(button, a, [role="button"], [role="link"], [role="treeitem"], [class*="interactive_"]):not(:disabled):not([aria-disabled="true"]) {
+  cursor: var(--alpine-cursor, pointer) !important;
 }
 
 #app-mount > div[class*="appAsidePanelWrapper"],
