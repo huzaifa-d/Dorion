@@ -23,9 +23,12 @@
 
 # Alpine Crimson custom branch
 
-This branch contains an unofficial Discord-branded Dorion build, the Alpine Crimson
-theme and its optional configurable halo companion. See the
+This branch contains an unofficial Discord-branded Dorion v7.0.1 build, the Alpine
+Crimson theme and its optional configurable halo companion. See the
 [theme and installation guide](themes/alpine-crimson/README.md).
+
+Optional local plugins add [individual embed dismissal](plugins/embed-dismissal/README.md)
+and [seven recent reaction shortcuts](plugins/recent-reactions/README.md).
 
 ![Alpine Crimson illustrative mock-up with fictional content](themes/alpine-crimson/preview.png)
 
@@ -54,34 +57,30 @@ the original Dorion releases, not this custom build.
   <tr>
     <td width="23%">
       <div align="center">
-        <a href="https://github.com/SpikeHD/dorion/releases/download/v6.14.0/Dorion_6.14.0_x64_en-US.msi">x86_64</a>
+        <a href="https://github.com/SpikeHD/dorion/releases/download/v7.0.1/Dorion_7.0.1_x64_en-US.msi">x86_64</a>
         <span>|</span>
-        <a href="https://github.com/SpikeHD/Dorion/releases/download/v6.14.0/Dorion_6.14.0.arm64-setup.exe">ARM</a>
+        <a href="https://github.com/SpikeHD/Dorion/releases/download/v7.0.1/Dorion_7.0.1.arm64-setup.exe">ARM</a>
       </div>
     </td>
     <td width="23%">
       <div align="center">
-        <a href="https://github.com/SpikeHD/dorion/releases/download/v6.14.0/Dorion_6.14.0_x64.dmg">x86_64</a>
+        <a href="https://github.com/SpikeHD/dorion/releases/download/v7.0.1/Dorion_7.0.1_x64.dmg">x86_64</a>
         <span>|</span>
-        <a href="https://github.com/SpikeHD/dorion/releases/download/v6.14.0/Dorion_6.14.0_aarch64.dmg">ARM</a>
+        <a href="https://github.com/SpikeHD/dorion/releases/download/v7.0.1/Dorion_7.0.1_aarch64.dmg">ARM</a>
       </div>
     </td>
     <td width="23%">
       <div align="center">
-        <a href="https://github.com/SpikeHD/dorion/releases/download/v6.14.0/Dorion_6.14.0_amd64.deb">x86_64</a>
+        <a href="https://github.com/SpikeHD/dorion/releases/download/v7.0.1/Dorion_7.0.1_amd64.deb">x86_64</a>
         <span>|</span>
-        <a href="https://github.com/SpikeHD/dorion/releases/download/v6.14.0/Dorion_6.14.0_armhf.deb">ARM v7</a>
-        <span>|</span>
-        <a href="https://github.com/SpikeHD/dorion/releases/download/v6.14.0/Dorion_6.14.0_arm64.deb">ARM64</a>
+        <a href="https://github.com/SpikeHD/dorion/releases/download/v7.0.1/Dorion_7.0.1_arm64.deb">ARM64</a>
       </div>
     </td>
     <td width="23%">
       <div align="center">
-        <a href="https://github.com/SpikeHD/dorion/releases/download/v6.14.0/Dorion_6.14.0-1.x86_64.rpm">x86_64</a>
+        <a href="https://github.com/SpikeHD/dorion/releases/download/v7.0.1/Dorion_7.0.1-1.x86_64.rpm">x86_64</a>
         <span>|</span>
-        <a href="https://github.com/SpikeHD/dorion/releases/download/v6.14.0/Dorion_6.14.0-1.armhfp.rpm">ARM v7</a>
-        <span>|</span>
-        <a href="https://github.com/SpikeHD/dorion/releases/download/v6.14.0/Dorion_6.14.0-1.aarch64.rpm">ARM64</a>
+        <a href="https://github.com/SpikeHD/dorion/releases/download/v7.0.1/Dorion_7.0.1-1.aarch64.rpm">ARM64</a>
       </div>
     </td>
   </tr>
@@ -129,16 +128,12 @@ the original Dorion releases, not this custom build.
       <div align="center">
         <a href="https://nightly.link/SpikeHD/Dorion/workflows/build/main/dorion-x86_64-unknown-linux-gnu-deb.zip">x86_64</a>
         <span>|</span>
-        <a href="https://nightly.link/SpikeHD/Dorion/workflows/build/main/dorion-armv7-unknown-linux-gnueabihf-deb.zip">ARM v7</a>
-        <span>|</span>
         <a href="https://nightly.link/SpikeHD/Dorion/workflows/build/main/dorion-aarch64-unknown-linux-gnu-deb.zip">ARM64</a>
       </div>
     </td>
     <td width="23%">
       <div align="center">
         <a href="https://nightly.link/SpikeHD/Dorion/workflows/build/main/dorion-x86_64-unknown-linux-gnu-rpm.zip">x86_64</a>
-        <span>|</span>
-        <a href="https://nightly.link/SpikeHD/Dorion/workflows/build/main/dorion-armv7-unknown-linux-gnueabihf-rpm.zip">ARM v7</a>
         <span>|</span>
         <a href="https://nightly.link/SpikeHD/Dorion/workflows/build/main/dorion-aarch64-unknown-linux-gnu-rpm.zip">ARM64</a>
       </div>
@@ -167,6 +162,7 @@ the original Dorion releases, not this custom build.
 * [Building](#building)
   * [Prerequisites](#prerequisites)
   * [Steps](#steps)
+  * [Shared CEF](#shared-cef)
 * [Known Issues](#known-issues)
 * [Troubleshooting](#troubleshooting)
   * [Things you Might be Asked to Provide](#things-you-might-be-asked-to-provide)
@@ -250,8 +246,8 @@ Dorion supports all themes, BetterDiscord and others, with a [couple caveats](#k
 
 | Feature                                        | Windows 10/11 | Windows 7[^1] | Linux            | MacOS           |
 |------------------------------------------------|---------------|---------------|------------------|-----------------|
-| Basics (logging in, navigation, text/DMs etc.) | ✓             | ~             | ~[^2]            | ✓               |
-| Voice                                          | ✓             | ~             | ✗[^3]            | ✓               |
+| Basics (logging in, navigation, text/DMs etc.) | ✓             | ~             | ✓                | ✓               |
+| Voice                                          | ✓             | ~             | ✓                | ✓               |
 | Themes                                         | ✓             | ~             | ✓                | ✓               |
 | Shelter                                        | ✓             | ~             | ✓                | ✓               |
 | Dorion Plugins                                 | ✓             | ~             | ✓                | ✓               |
@@ -259,10 +255,6 @@ Dorion supports all themes, BetterDiscord and others, with a [couple caveats](#k
 </div>
 
 [^1]: Windows 7 support is possible by installing API extensions, such as VxKex. It could break at any point, and if this happens, I probably won't put much effort into fixing it (PRs always welcome of course!). You may also need to manually install [WebView2](https://developer.microsoft.com/en-us/microsoft-edge/webview2/) if Dorion doesn't open after installing!
-
-[^2]: Some people report Dorion freezing on Linux, particularly when GIFs are playing. This is, as far as I can tell, a bug in WebkitGTK.
-
-[^3]: Support for WebRTC is hidden behind a build-time flag that is unused in most distros, and if it were, the implementation is still incomplete. This will be available when WebkitGTK ships with WebRTC support.
 
 # Building
 
@@ -295,14 +287,7 @@ Dorion supports all themes, BetterDiscord and others, with a [couple caveats](#k
     pnpm build:updater
     ```
 
-6. (Linux-only) Build the WebKitGTK extension
-    ```sh
-    cd src-tauri/extension_webkit
-    cmake .
-    cmake --build .
-    ```
-
-7. Build!
+6. Build!
 
     ```sh
     # Build Dorion...
@@ -313,6 +298,26 @@ Dorion supports all themes, BetterDiscord and others, with a [couple caveats](#k
     ```
 
 All built files will be in `src-tauri/target/(release|debug)/`. Installation files (eg. `.msi`, `.deb`) are located in `bundle/`.
+
+## Shared CEF
+
+Dorion can link against a system-installed CEF instead of bundling it. Relevant env vars:
+
+* `DORION_SHARED_CEF=1` skips `scripts/bundle-cef.sh`
+* `NIX_CEF_BINARY=1` (NixOS) has `cef-dll-sys` link against the CEF from the Nix environment
+* `FLATPAK=1` points `cef-dll-sys` at `/usr/lib`, matching the CEF runtime extension in the Flatpak manifest
+
+The runtime has to resolve `libcef.so` from the system install, e.g. with an rpath:
+
+```sh
+# Fedora
+RUSTFLAGS="-C link-arg=-Wl,-rpath,/usr/lib64/cef"
+```
+
+CEF finds its resources (locales, paks) next to `libcef.so`, so nothing else is needed!
+
+The system CEF must, however, be **at least** the version Dorion's `cef-dll-sys` is pinned at. CEF >= 152 uses API versioning but
+older CEF requires an exact version match.
 
 ## Flatpak
 
@@ -373,14 +378,6 @@ If you submit an issue or ask a question in the Discord, it's likely you will be
 * [Reinstall WebView2](https://developer.microsoft.com/en-us/microsoft-edge/webview2/)
   * Fully uninstall and reinstall.
   * If you are having trouble uninstalling it, or the installer says its already installed even though you uninstalled, try deleting this registry folder and uninstalling again `Computer\HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\EdgeUpdate\Clients\{F3017226-FE2A-4295-8BDF-00C3A9A7E4C5}`
-
-## Linux
-### White/blank/frozen screen
-* Run Dorion with either, or both, of the following environment variables:
-  ```sh
-  WEBKIT_DISABLE_COMPOSITING_MODE=1
-  WEBKIT_DISABLE_DMABUF_RENDERER=1
-  ```
 
 # Using Plugins, Extensions, and Themes
 

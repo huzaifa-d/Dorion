@@ -51,7 +51,7 @@
   },
   "productName": "Discord",
   "mainBinaryName": "Discord",
-  "version": "6.14.0",
+  "version": "7.0.1",
   "identifier": "com.spikehd.dorion",
   "plugins": {
     "deep-link": {

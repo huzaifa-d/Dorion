@@ -81,6 +81,21 @@
   cursor: var(--alpine-cursor, pointer) !important;
 }
 
+#app-mount [class*="message_"][class*="cozy_"] > [class^="buttonContainer_"] {
+  inset-inline-start: var(--custom-message-margin-left-content-cozy, 72px) !important;
+  inset-inline-end: auto !important;
+}
+
+.a11y-font-scaled-down #app-mount [class*="message_"][class*="cozy_"] > [class^="buttonContainer_"] {
+  inset-inline-start: 4.5rem !important;
+}
+
+#app-mount [class*="message_"][class*="cozy_"] > [class^="buttonContainer_"] > [class*="buttons_"] {
+  inset-inline-start: 0 !important;
+  inset-inline-end: auto !important;
+  padding-inline-start: 0 !important;
+}
+
 #app-mount > div[class*="appAsidePanelWrapper"],
 #app-mount div[class*="notAppAsidePanel"],
 #app-mount div[data-layer="base"],

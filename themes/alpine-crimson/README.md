@@ -24,7 +24,7 @@ maximise/restore and close use orange, blue and red hover/focus highlights.
 The home icon is never greyscaled. Server artwork regains colour when hovered or
 selected; notification counters regain colour when hovered.
 
-The packaged theme also embeds a static **#623BA0 purple cursor**, using the
+The packaged theme also embeds a static **#513247 plum cursor**, using the
 original maroon cursor's 32px artwork and hotspot `(26, 10)`. There is no click
 animation or Windows-wide cursor change. The rules target app surfaces and
 interactive controls rather than overriding text fields and resize handles.
